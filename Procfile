@@ -1,1 +1,1 @@
-worker: ./gmd
+worker: ./bin/gmd
