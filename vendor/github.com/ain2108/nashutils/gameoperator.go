@@ -149,6 +149,7 @@ func (gop *GameOperator) operate() error {
 
 				// If there is no botdispatcher, we cannot do anything here
 				if gop.gm.bdAddr == "" {
+					log.Printf("INFO GameOperator %s: supposeed to add bots but not doing such thing\n", gop.contractAddress)
 					return nil
 				}
 
@@ -158,8 +159,6 @@ func (gop *GameOperator) operate() error {
 					return err
 				}
 				botn := maxp.Int64() - state.CurrNumberCommits.Int64()
-
-				log.Printf("INFO GameOperator %s: supposeed to add bots but not doing such thing\n", gop.contractAddress)
 
 				// Lets ask the dispatcher to send out the bots
 				// args := DispatchArgs{

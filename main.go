@@ -36,7 +36,7 @@ func main() {
 
 	// Initialzie the game dispatcher
 	var bd nu.BotDispatcher
-	e := bd.Init(ip, nu.BDPort, bdkey, false)
+	e := bd.Init(ip, nu.BDPort, bdkey, true)
 	if e != nil {
 		log.Fatal(e)
 	}
