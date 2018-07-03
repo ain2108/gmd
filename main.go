@@ -69,11 +69,20 @@ func defaultInit(ip string) error {
 		log.Fatal(e)
 	}
 
-	contractAddr := os.Getenv("ADDR1")
+	prefix := "ADDR"
 
-	e = clerk.ConnectGame(contractAddr)
-	if e != nil {
-		log.Fatal(e)
+	for i := 1; i > 0; i++ {
+
+		contractAddr := os.Getenv(prefix + strconv.Itoa(i))
+		if contractAddr == "" {
+			break
+		}
+
+		e = clerk.ConnectGame(contractAddr)
+		if e != nil {
+			log.Fatal(e)
+		}
+
 	}
 
 	return nil
