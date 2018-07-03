@@ -144,7 +144,7 @@ func (b *Bot) DoBotStuff(address string) error {
 	}
 	b.auth.Value = nil
 
-	log.Printf("INFO Bot.DoBotStuff 0x%x: succesful bot commit\n", crypto.PubkeyToAddress(b.key.PublicKey))
+	log.Printf("INFO Bot.DoBotStuff 0x%x: succesful bot commit %s\n", crypto.PubkeyToAddress(b.key.PublicKey), guessstr)
 
 	// We wait for the contract change state
 
@@ -172,7 +172,7 @@ func (b *Bot) DoBotStuff(address string) error {
 	if txerr != nil {
 		return txerr
 	}
-	log.Printf("INFO Bot.DoBotStuff 0x%x: succesful bot reveal succesful\n", crypto.PubkeyToAddress(b.key.PublicKey))
+	log.Printf("INFO Bot.DoBotStuff 0x%x: succesful bot reveal succesful %s\n", crypto.PubkeyToAddress(b.key.PublicKey), guessstr)
 
 	return nil
 }
