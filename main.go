@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"log"
-	nu "github.com/ain2108/nashutils"
 	"net"
 	"os"
 	"strconv"
+
+	nu "github.com/ain2108/nashutils"
 )
 
 func main() {
@@ -51,9 +52,28 @@ func main() {
 	defer gm.Kill()
 	log.Printf("INFO gmd: gamemaster initialized succesfully on %s:%s\n", ip, strconv.Itoa(nu.GMPort))
 
+	defaultInit(ip)
+
 	// Now we siply sit here indefinately, but we need a better way to terminate
 	select {}
 
+}
+
+func defaultInit(ip string) error {
+
+	// Initialize the clerk
+	gmAddr := ip + ":" + strconv.Itoa(nu.GMPort)
+	var clerk nu.Clerk
+	e := clerk.Init(gmAddr)
+	if e != nil {
+		log.Fatal(e)
+	}
+
+	contractAddr := os.Getenv("ADDR1")
+
+	clerk.ConnectGame(contractAddr)
+
+	return nil
 }
 
 func checkInput(ip string, port string) {
