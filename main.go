@@ -7,7 +7,8 @@ import (
 	"os"
 	"strconv"
 
-	nu "github.com/ain2108/nashutils"
+	//nu "github.com/ain2108/nashutils"
+	nu "nashutils"
 )
 
 func main() {
