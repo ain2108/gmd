@@ -34,9 +34,12 @@ func main() {
 		}
 	}
 
+	botDistro := make(map[float64]uint)
+	botDistro[0.05] = 5
+
 	// Initialzie the game dispatcher
 	var bd nu.BotDispatcher
-	e := bd.Init(ip, nu.BDPort, bdkey, true)
+	e := bd.Init(ip, nu.BDPort, bdkey, false, botDistro)
 	if e != nil {
 		log.Fatal(e)
 	}

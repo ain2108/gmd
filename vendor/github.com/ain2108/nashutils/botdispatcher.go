@@ -62,7 +62,7 @@ func (bd *BotDispatcher) Dispatch(args DispatchArgs, res *DispatchReply) error {
 
 // Init initializes the BotDispatcher on ipAddr:port.
 // hexkey is the key to unlock the funding wallet
-func (bd *BotDispatcher) Init(ipAddr string, port int, hexkey string, def bool) error {
+func (bd *BotDispatcher) Init(ipAddr string, port int, hexkey string, def bool, botDistro map[float64]uint) error {
 
 	bd.bdLock.Lock()
 	defer bd.bdLock.Unlock()
@@ -78,6 +78,11 @@ func (bd *BotDispatcher) Init(ipAddr string, port int, hexkey string, def bool) 
 	bd.queues = make(map[float64]*BotQ)
 	if def {
 		bd.initBotQsDefault()
+	} else {
+		e := bd.initBotQs(botDistro)
+		if e != nil {
+			return e
+		}
 	}
 
 	// RPC stuff
@@ -168,6 +173,21 @@ func (bd *BotDispatcher) refill() {
 
 // init helpers
 //
+
+// Initialize the bot distribution. How many bots are there per each minBal
+func (bd *BotDispatcher) initBotQs(botDistro map[float64]uint) error {
+
+	for minBal, botn := range botDistro {
+		botq := &BotQ{}
+		e := botq.Init(minBal, botn)
+		if e != nil {
+			return e
+		}
+		bd.queues[minBal] = botq
+	}
+
+	return nil
+}
 
 func (bd *BotDispatcher) initBotQsDefault() error {
 

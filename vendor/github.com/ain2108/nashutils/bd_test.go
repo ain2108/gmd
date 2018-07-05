@@ -22,7 +22,7 @@ const (
 
 func TestBotDispatcherInit(t *testing.T) {
 	var bd BotDispatcher
-	bd.Init(RPCAddr, RPCPort, OwnerHexKey, true)
+	bd.Init(RPCAddr, RPCPort, OwnerHexKey, true, nil)
 
 	// bdAddr := RPCAddr + ":" + strconv.Itoa(RPCPort)
 
@@ -75,7 +75,7 @@ func TestBotQInit(t *testing.T) {
 func TestBotDispatch(t *testing.T) {
 
 	var bd BotDispatcher
-	bd.Init(RPCAddr, RPCPort, OwnerHexKey, true)
+	bd.Init(RPCAddr, RPCPort, OwnerHexKey, true, nil)
 	time.Sleep(60 * time.Second)
 
 	bdAddr := RPCAddr + ":" + strconv.Itoa(RPCPort)

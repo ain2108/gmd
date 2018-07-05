@@ -49,7 +49,7 @@ func assertNotEqual(t *testing.T, a interface{}, b interface{}, message string) 
 func TestDispatch(t *testing.T) {
 
 	var bd BotDispatcher
-	e := bd.Init(RPCAddr, BDPort, DispatcherHexKey, true)
+	e := bd.Init(RPCAddr, BDPort, DispatcherHexKey, true, nil)
 	if e != nil {
 		log.Fatal(e)
 	}
