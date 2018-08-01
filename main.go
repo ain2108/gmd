@@ -35,7 +35,7 @@ func main() {
 	}
 
 	botDistro := make(map[float64]uint)
-	botDistro[0.05] = 5
+	botDistro[0.05] = 12
 
 	// Initialzie the game dispatcher
 	var bd nu.BotDispatcher

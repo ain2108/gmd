@@ -141,7 +141,8 @@ func (gop *GameOperator) operate() error {
 		if state.CommitStageStartBlock.IsInt64() {
 
 			// Get the two deadlines
-			botDeadline := state.CommitStageStartBlock.Int64() + ((state.StageLength.Int64() * 1) / 2)
+			//botDeadline := state.CommitStageStartBlock.Int64() + ((state.StageLength.Int64() * 1) / 2)
+			botDeadline := state.CommitStageStartBlock.Int64() + 1
 			transitionDeadline := state.CommitStageStartBlock.Int64() + state.StageLength.Int64()
 
 			// We can que bots, initiate a transition or do nothing
@@ -159,13 +160,6 @@ func (gop *GameOperator) operate() error {
 					return err
 				}
 				botn := maxp.Int64() - state.CurrNumberCommits.Int64()
-
-				// Lets ask the dispatcher to send out the bots
-				// args := DispatchArgs{
-				// 	ContractAddress: gop.contractAddress,
-				// 	RequiredBalance: toEth(stake),
-				// 	Number:          uint(botn)}
-				// go gop.gm.bd.Dispatch(args, &DispatchReply{})
 
 				go gop.dispatch(gop.gm.bdAddr, uint(botn), toEth(stake))
 
